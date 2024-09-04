@@ -38,5 +38,24 @@ game.difficulty = {
   intermediate: "Medimum",
   advance: "Hard",
 }
-console.log(game);
+//console.log(game);
 //////////////
+/*
+Exercise 4
+1. Select a starter Pokémon from the `pokemon` array. Remember, a starter Pokémon's `starter` property is true.
+2. Add this Pokémon to the `game.party` array. Which array method will you use to add them?
+
+
+Solve Exercise 4 here:
+*/
+
+for (let i = 0; i < pokemon.length; i++) {
+  if (pokemon[i].starter == true) {
+    game.party.push(pokemon[i].starter);
+    break;
+  }
+
+}
+
+console.log(game.party);
+///////////////////////
