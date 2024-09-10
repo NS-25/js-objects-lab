@@ -28,8 +28,9 @@ const array = {
 };
 // console.log(array);
 // console.table(array);
-// //console.dir(pokemon, { maxArrayLength: null });
+// console.dir(pokemon, { maxArrayLength: null });
 //console.log(pokemon[59]);
+// excercise-2
 //console.log(game);
 
 /*
@@ -41,12 +42,8 @@ Exercise 3
 Solve Exercise 3 here:
 */
 
-game.difficulty = {
-  basic: "Easy",
-  intermediate: "Medimum",
-  advance: "Hard",
-}
-//console.log(game);
+// game.difficulty = "Hard";
+// console.log(game);
 //////////////
 /*
 Exercise 4
@@ -57,17 +54,14 @@ Exercise 4
 Solve Exercise 4 here:
 */
 
-// for (let i = 0; i < pokemon.length; i++) {
-//   if (pokemon[i].starter == true) {
-//     game.party.push(pokemon[i].starter);
-
+// pokemon.forEach(() => {
+//   if (pokemon.starter == true) {
+//     game.party.push(pokemon.starter);
 //   }
-//   break;
-// }
-//game.party.push(pokemon[0].starter);
+// });
 
-//console.log(game.party);
-///////////////////////
+game.party.push(pokemon[0]);
+
 /*
 Exercise 5
 1. Choose three more Pokémon from the `pokemon` array and add them to your party.
@@ -105,6 +99,8 @@ Solve Exercise 5 here:
 // })
 // console.log(threePokemons)
 
+// console.log(game.party);///////////// Example try my self ////////
+game.party.push(pokemon[3], pokemon[7], pokemon[12]);
 //console.log(game.party);
 
 /*
@@ -116,24 +112,24 @@ Exercise 6
 Solve Exercise 6 here:
 */
 
-// for (let i = 0; i < game.gyms.length; i++) {
-//   if (game.gyms[i].difficulty < 3) {
-//     game.gyms[i].completed = true;
-//   }
-// }
+for (let i = 0; i < game.gyms.length; i++) {
+  if (game.gyms[i].difficulty < 3) {
+    game.gyms[i].completed = true;
+  }
+}
 //console.log(game.gyms);
 /*
 Exercise 7
 1. Evolve the starter Pokémon you added to your party earlier. Each starter Pokémon evolves into a specific one.
 2. How would you replace the current starter Pokémon in your party with its evolved form?
 
-Hint: 
+Hint:
   - Pokemon 1: Bulbasaur evolves into Pokemon 2: Ivysaur
   - Pokemon 4: Charmander evolves into Pokemon 5: Charmeleon
   - Pokemon 7: Squirtle evolves into Pokemon 8: Wartortle
   - Pokemon 25: Pikachu evolves into Pokemon 26: Raichu
 
-More Hints: The existing starter Pokemon will be *replaced* in your party with the Pokemon it evolved into. When working with an array of objects, the splice() array method is ideal for replacing one element with another. 
+More Hints: The existing starter Pokemon will be *replaced* in your party with the Pokemon it evolved into. When working with an array of objects, the splice() array method is ideal for replacing one element with another.
 
 
 Solve Exercise 7 here:
@@ -144,15 +140,17 @@ Solve Exercise 7 here:
 // [1,2,3,4]
 // next element
 
-// let nextElements = []
+//  let nextElements = []
 
 // game.party.forEach((ele) => {
-//   let next = pokemon.find(po => po.number === ele.number + 1);
+//  let next = pokemon.find(po => po.number === ele.number + 1);
 //   nextElements.push(next)
-// })
+//  })
 
-//game.party.splice(0, 3, ...nextElements)
+// game.party.splice(0, 3, ...nextElements)
 
+// console.log(game.party)
+game.party.splice(0, 1, pokemon[1]);
 //console.log(game.party)
 /*
 Exercise 8
@@ -161,11 +159,11 @@ Exercise 8
 
 Solve Exercise 8 here:
 */
-// pokemon.forEach((ele) => {
-//   game.party.push(ele.name);
-// })
+pokemon.forEach((ele) => {
+  game.party.push(ele.name);
+})
 
-// console.log(game.party);
+//console.log("ex-8 :", game.party);
 /////////////////////////////
 /*
 Exercise 9
@@ -175,11 +173,12 @@ Exercise 9
 
 Solve Exercise 9 here:
 */
-// for (let i = 0; i < pokemon.length; i++) {
-//   if (pokemon[i].starter === true || pokemon[i].starter === false) {
-//     console.log(pokemon[i].name);
-//   }
-// }
+for (let i = 0; i < pokemon.length; i++) {
+  if (pokemon[i].starter) {
+    console.log(pokemon[i].name);
+  }
+}
+// console.log(pokemon["starter"]);
 ///////////////////////
 /*
 Exercise 10
@@ -192,14 +191,14 @@ After writing this method, call it and pass in a Pokemon object of your choice f
 
 Solve Exercise 10 here: /// Question!!!!!!
 */
-let pokemonObj = {};
-function catchPokemon() {
-  game.party.push(pokemonObj)
 
-  //console.log(game.party);
+game.catchPokemon = (pokemonObj) => {
+  game.party.push(pokemonObj)
 };
-catchPokemon();
-//console.log(game.party[0]);
+
+game.catchPokemon(pokemon[20])
+
+console.log(game.party);
 ////////////////////////
 /*
 Exercise 11
@@ -216,16 +215,15 @@ Solve Exercise 11 here:
 
 
 
+game.catchPokemon = (pokemonObj) => {
+  game.party.push(pokemonObj)
+  game.items[1].quantity--;
+  console.log(game.items[1].quantity);
+  console.log(game.party)
+};
 
-
-
-
-
-
-
-
-
-
+ game.catchPokemon(pokemon[20]);
+game.catchPokemon(pokemon[10]);
 
 //////////////////////////////
 /*
@@ -249,7 +247,7 @@ game.completeGyms = function () {
 
 game.completeGyms();
 
-//console.log(game.gyms);
+console.log(game.gyms);
 
 ////////////////////////////////
 /*
@@ -259,13 +257,13 @@ Exercise 13
 
 This method should:
   - Not accept any arguments.
-  - Initially create a constant `gymTally`, which is an object that has two 
+  - Initially create a constant `gymTally`, which is an object that has two
     properties: `completed` and `incomplete`, both of which are initially set to 0.
-  - Iterate through the objects in the `game.gyms` array and update the 
-    properties on `gymTally` as follows: 
-    - `completed` should count how many gyms in the array have a value of `true` 
-      for their `completed` property. 
-    - `incomplete` should count how many gyms in the array have a value of 
+  - Iterate through the objects in the `game.gyms` array and update the
+    properties on `gymTally` as follows:
+    - `completed` should count how many gyms in the array have a value of `true`
+      for their `completed` property.
+    - `incomplete` should count how many gyms in the array have a value of
       `false` for their `completed` property.
   - Log the value of `gymTally`.
   - The method should not return anything.
@@ -288,11 +286,12 @@ game.gymStatus = function () {
   }
 
   // Log the final tally
-  //console.log(gymTally);
+  //clear
+  console.log(gymTally);
 };
 
 // Call the gymStatus method to tally and log completed and incomplete gyms
-//game.gymStatus();
+game.gymStatus();
 /////////////////////////////
 /*
 Exercise 14
@@ -311,7 +310,7 @@ game.partyCount = function () {
   return game.party.length;
 };
 
-console.log(game.partyCount());
+ console.log(game.partyCount());
 /////////////////////////
 
 /*
@@ -332,8 +331,8 @@ game.completeGymsBelow8 = function () {
   }
 };
 
-game.completeGymsBelow8();
-console.log(game.gyms);
+ game.completeGymsBelow8();
+ console.log(game.gyms);
 
 
 
